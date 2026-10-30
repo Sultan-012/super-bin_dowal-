@@ -1,0 +1,2 @@
+# Default v2 development requirements.
+-r requirements-shift-dev.txt

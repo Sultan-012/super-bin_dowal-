@@ -1,0 +1,4 @@
+[tool.pytest.ini_options]
+testpaths = ["shift_tests"]
+pythonpath = ["."]
+markers = ["sqlserver: requires TEST_SQLSERVER_URL pointing to a disposable SQL Server database", "postgres: requires TEST_POSTGRES_URL pointing to a disposable bin_doul_test database"]

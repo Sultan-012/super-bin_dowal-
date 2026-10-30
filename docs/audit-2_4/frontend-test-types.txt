@@ -1,0 +1,5 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> bin-doul-shifts-arabic@2.4.0 check:test
+> tsc -p tsconfig.test.json
+

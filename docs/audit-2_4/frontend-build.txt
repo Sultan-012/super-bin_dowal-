@@ -1,0 +1,14 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> bin-doul-shifts-arabic@2.4.0 build
+> tsc -b && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 1587 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.67 kB │ gzip:  0.39 kB
+dist/assets/index-61aZlYPj.css   28.64 kB │ gzip:  6.42 kB
+dist/assets/index-BlB5NmpX.js   268.57 kB │ gzip: 81.21 kB
+✓ built in 1.95s

@@ -1,0 +1,11 @@
+تم إنشاء المدير. لا توجد كلمة مرور افتراضية.
+PACKAGED_SMOKE_PASS: migrations, CLI administrator, RTL index, JS/CSS, authentication, shift save, PDF fonts, restart persistence.
+
+<QA_WORKSPACE>/test-venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> 20261029_01, Bin Doul shifts PostgreSQL schema
+INFO  [alembic.runtime.migration] Running upgrade 20261029_01 -> 20261029_02, Append-only financial versions, approvals and audit; initialize the store.
+INFO  [alembic.runtime.migration] Running upgrade 20261029_02 -> 20261030_03, Allow several daily shifts and optional invoice references/documents.
+INFO  [alembic.runtime.migration] Running upgrade 20261030_03 -> 20261030_04, Keep append-only guards and classify their rejection as an integrity error.

@@ -1,0 +1,12 @@
+{
+  "postgresql": "17.11",
+  "exported_schema_sql_executed_in_fresh_database": true,
+  "upgrade_existing_v2_to_24_preserved_records": true,
+  "runtime_non_owner_login_and_user_creation": true,
+  "runtime_denied_delete_truncate_alter_create": true,
+  "pg_dump_pg_restore_every_table_equal_before_hold": true,
+  "post_restore_auth_sessions_revoked": true,
+  "post_restore_audit_record": true,
+  "new_engine_persistence": true,
+  "powershell_wrapper_executed": false
+}

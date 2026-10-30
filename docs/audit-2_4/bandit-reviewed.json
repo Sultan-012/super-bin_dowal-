@@ -1,0 +1,13 @@
+{
+  "scanner": "Bandit 1.9.4",
+  "scope": "backend/shift_app",
+  "high": 0,
+  "medium": 0,
+  "low": 1,
+  "reviewed_low": {
+    "id": "B105",
+    "file": "backend/shift_app/main.py",
+    "line": 326,
+    "reason": "Public password_min_length=8 metadata; not a password or credential"
+  }
+}

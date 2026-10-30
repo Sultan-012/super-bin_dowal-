@@ -1,0 +1,16 @@
+export type Money=string;
+export type User={id:number;username:string;full_name:string;role:'admin'|'employee';active:boolean};
+export type Me={user:User;store:{store_name:string;currency:string;timezone:string};today:string;submitted_today:boolean};
+export type Kind='purchase'|'off_device'|'bank';
+export type HistoricalKind=Kind|'debt';
+export type EntryInput={line_key:string;kind:Kind;name:string;amount:Money;reference:string;description:string;item_code:string;quantity:number|null;invoice_number:string;invoice_total:Money|null;purpose:'current_shift'|null;attachment_id:string|null};
+export type EntryDraft=Omit<EntryInput,'quantity'|'invoice_total'> & {quantity:string;invoice_total:string;attachment_name?:string;uploading?:boolean;upload_error?:string};
+export type Draft={business_date:string;deposit_date:string;deposit_number:string;deposit_amount:Money;device_sales:Money;notes:string;entries:EntryDraft[]};
+export type Entry=Omit<EntryInput,'kind'|'purpose'> & {kind:HistoricalKind;purpose:'current_shift'|'customer_account'|null;id:number;version_id:number;review?:{status:string;note:string;debt_id:number|null};attachment?:{filename:string;id:string}};
+export type Totals={device_sales:Money;outside_sales:Money;total_sales:Money;purchases:Money;new_debts?:Money;shift_bank:Money;account_bank?:Money;total_bank:Money;deposit_amount:Money;opening_cash?:Money|null;pos_sales?:Money|null;retained_cash?:Money|null;cash_sales?:Money|null;expected_cash?:Money|null;actual_cash?:Money|null;difference?:Money|null;shortage?:Money|null;surplus?:Money|null;status:string;message:string;confirmation_mode?:string;financial_variance_calculated?:boolean};
+export type Shift={id:number;employee_id:number;business_date:string;employee:string;current_version:number;approved_version:number|null;previous_shift_id:number|null;deposit_date:string;deposit_number:string;totals:Totals;approved:boolean;legacy_accounting:boolean};
+export type Version={id:number;shift_id:number;number:number;business_date:string;deposit_date:string;deposit_number:string;deposit_amount:Money;device_sales:Money;notes:string;reason:string;created_by:number;created_at:string};
+export type Detail={shift:Shift;employee:string;version:Version;entries:Entry[];totals:Totals;approved:boolean;approval:{approved_by:number;approved_at:string;note:string}|null;versions:Version[];has_legacy_cash:boolean};
+export type Aggregate={total_sales:Money;device_sales:Money;outside_sales:Money;purchases:Money;shift_bank:Money;total_bank:Money;deposit_amount:Money;count:number;approved:number;pending:number};
+export type Report={totals:Aggregate;shifts:Shift[];store:Me['store'];generated_at:string;start:string|null;end_exclusive:string|null};
+export type Page='dashboard'|'shifts'|'archive'|'notifications'|'users'|'settings'|'detail';

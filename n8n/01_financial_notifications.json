@@ -1,0 +1,750 @@
+{
+  "name": "Bin Doul | Financial notifications (inactive)",
+  "active": false,
+  "nodes": [
+    {
+      "id": "poll-outbox",
+      "name": "Poll outbox",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "claim-notification",
+      "name": "Claim notification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.BIN_DOUL_API_URL + '/api/integrations/outbox/claim' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ 'n8n-'+$execution.id+'-claim-notification' }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "retryOnFail": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Bin Doul API"
+        }
+      }
+    },
+    {
+      "id": "has-a-delivery",
+      "name": "Has a delivery",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "Has a delivery-condition",
+              "leftValue": "={{ $json.delivery ? 'yes' : 'no' }}",
+              "rightValue": "yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "prepare-message",
+      "name": "Prepare message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const d=$input.first().json.delivery;\nconst p=d.payload;\nconst format=v=>{const [whole,fraction='']=String(v).split('.');return whole.replace(/\\B(?=(\\d{3})+(?!\\d))/g,',')+'.'+fraction.padEnd(2,'0');};\nlet subject='',text='';\nif(d.kind==='off_device_sales'){\n subject='أصناف خارج الجهاز | '+p.store+' | '+p.business_date;\n text='الموظف: '+p.employee+'\\nتاريخ الصندوق: '+p.business_date+'\\n'+p.items.map(i=>i.name+' | رقم '+i.item_code+' | عدد '+i.quantity+' | قيمة '+format(i.amount)+' ريال يمني').join('\\n');\n}else if(d.kind==='cash_shortage'){\n subject='عجز معتمد في الوردية #'+p.shift_id+' | '+p.store;\n text='الموظف: '+p.employee+'\\nتاريخ الصندوق: '+p.business_date+'\\nالعجز: '+format(p.shortage)+' ريال يمني\\nالنقد المتوقع: '+format(p.expected_cash)+'\\nالنقد الموثق: '+format(p.actual_cash)+'\\nملاحظة الاعتماد: '+p.note;\n}else{\n subject='التقرير الشهري | '+p.employee+' | '+p.month;\n text='تقرير مستقل للموظف '+p.employee+' عن شهر '+p.month+' بحسب تاريخ الصندوق في جهاز المحاسبة.\\nالمرفق لقطة محفوظة من قاعدة البيانات وقت تجهيز التقرير.';\n}\nreturn [{json:{delivery:d,subject,text,whatsapp_summary:(subject+' — '+text.replace(/\\n/g,' | ')).slice(0,1000)}}];"
+      }
+    },
+    {
+      "id": "email-channel",
+      "name": "Email channel",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "Email channel-condition",
+              "leftValue": "={{ $json.delivery.channel }}",
+              "rightValue": "email",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "email-monthly-report",
+      "name": "Email monthly report",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        -220
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "Email monthly report-condition",
+              "leftValue": "={{ $json.delivery.kind }}",
+              "rightValue": "monthly_report",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "email-report-pdf",
+      "name": "Email report PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        -400
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.BIN_DOUL_API_URL + '/api/integrations/events/' + $('Claim notification').first().json.delivery.event_id + '/report.pdf' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ 'n8n-'+$execution.id+'-email-report-pdf' }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 20000,
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "report"
+            }
+          }
+        }
+      },
+      "retryOnFail": false,
+      "onError": "continueErrorOutput",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Bin Doul API"
+        }
+      }
+    },
+    {
+      "id": "send-monthly-email",
+      "name": "Send monthly email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1540,
+        -400
+      ],
+      "parameters": {
+        "fromEmail": "={{ $env.BIN_DOUL_FROM_EMAIL }}",
+        "toEmail": "={{ $env.BIN_DOUL_MANAGER_EMAIL }}",
+        "subject": "={{ $('Prepare message').first().json.subject }}",
+        "emailFormat": "text",
+        "text": "={{ $('Prepare message').first().json.text }}",
+        "options": {
+          "appendAttribution": false,
+          "attachments": "report"
+        }
+      },
+      "retryOnFail": false,
+      "onError": "continueErrorOutput",
+      "credentials": {
+        "smtp": {
+          "id": "",
+          "name": "Bin Doul SMTP"
+        }
+      }
+    },
+    {
+      "id": "send-alert-email",
+      "name": "Send alert email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1320,
+        -140
+      ],
+      "parameters": {
+        "fromEmail": "={{ $env.BIN_DOUL_FROM_EMAIL }}",
+        "toEmail": "={{ $env.BIN_DOUL_MANAGER_EMAIL }}",
+        "subject": "={{ $('Prepare message').first().json.subject }}",
+        "emailFormat": "text",
+        "text": "={{ $('Prepare message').first().json.text }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "retryOnFail": false,
+      "onError": "continueErrorOutput",
+      "credentials": {
+        "smtp": {
+          "id": "",
+          "name": "Bin Doul SMTP"
+        }
+      }
+    },
+    {
+      "id": "whatsapp-monthly-report",
+      "name": "WhatsApp monthly report",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        260
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "WhatsApp monthly report-condition",
+              "leftValue": "={{ $json.delivery.kind }}",
+              "rightValue": "monthly_report",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "whatsapp-report-pdf",
+      "name": "WhatsApp report PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        180
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.BIN_DOUL_API_URL + '/api/integrations/events/' + $('Claim notification').first().json.delivery.event_id + '/report.pdf' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ 'n8n-'+$execution.id+'-whatsapp-report-pdf' }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 20000,
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "report"
+            }
+          }
+        }
+      },
+      "retryOnFail": false,
+      "onError": "continueErrorOutput",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Bin Doul API"
+        }
+      }
+    },
+    {
+      "id": "upload-whatsapp-pdf",
+      "name": "Upload WhatsApp PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        180
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://graph.facebook.com/' + $env.BIN_DOUL_WHATSAPP_GRAPH_VERSION + '/' + $env.BIN_DOUL_WHATSAPP_PHONE_ID + '/media' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "messaging_product",
+              "value": "whatsapp"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "report"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "retryOnFail": false,
+      "onError": "continueErrorOutput",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "WhatsApp Cloud Bearer"
+        }
+      }
+    },
+    {
+      "id": "send-whatsapp-monthly",
+      "name": "Send WhatsApp monthly",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        180
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://graph.facebook.com/' + $env.BIN_DOUL_WHATSAPP_GRAPH_VERSION + '/' + $env.BIN_DOUL_WHATSAPP_PHONE_ID + '/messages' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ ( {messaging_product:'whatsapp',to:$env.BIN_DOUL_MANAGER_WHATSAPP,type:'template',template:{name:$env.BIN_DOUL_WHATSAPP_MONTHLY_TEMPLATE,language:{code:$env.BIN_DOUL_WHATSAPP_LANGUAGE||'ar'},components:[{type:'header',parameters:[{type:'document',document:{id:$json.id,filename:'employee-'+$('Claim notification').first().json.delivery.payload.employee_id+'-'+$('Claim notification').first().json.delivery.payload.month+'.pdf'} }]},{type:'body',parameters:[{type:'text',text:$('Claim notification').first().json.delivery.payload.store},{type:'text',text:$('Claim notification').first().json.delivery.payload.employee},{type:'text',text:$('Claim notification').first().json.delivery.payload.month}]}]} } ) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "retryOnFail": false,
+      "onError": "continueErrorOutput",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "WhatsApp Cloud Bearer"
+        }
+      }
+    },
+    {
+      "id": "send-whatsapp-alert",
+      "name": "Send WhatsApp alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        480
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://graph.facebook.com/' + $env.BIN_DOUL_WHATSAPP_GRAPH_VERSION + '/' + $env.BIN_DOUL_WHATSAPP_PHONE_ID + '/messages' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ ( {messaging_product:'whatsapp',to:$env.BIN_DOUL_MANAGER_WHATSAPP,type:'template',template:{name:$env.BIN_DOUL_WHATSAPP_ALERT_TEMPLATE,language:{code:$env.BIN_DOUL_WHATSAPP_LANGUAGE||'ar'},components:[{type:'body',parameters:[{type:'text',text:$('Claim notification').first().json.delivery.payload.store},{type:'text',text:$('Prepare message').first().json.whatsapp_summary}]}]} } ) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "retryOnFail": false,
+      "onError": "continueErrorOutput",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "WhatsApp Cloud Bearer"
+        }
+      }
+    },
+    {
+      "id": "confirm-sent",
+      "name": "Confirm sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1980,
+        -80
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.BIN_DOUL_API_URL + '/api/integrations/deliveries/' + $('Claim notification').first().json.delivery.id + '/result' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ 'n8n-'+$execution.id+'-confirm-sent' }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 20000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {lease_token:$('Claim notification').first().json.delivery.lease_token,outcome:'sent',provider_reference:String($json.messageId||$json.messages?.[0]?.id||'').slice(0,200)} }}"
+      },
+      "retryOnFail": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Bin Doul API"
+        }
+      }
+    },
+    {
+      "id": "mark-uncertain",
+      "name": "Mark uncertain",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1980,
+        480
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.BIN_DOUL_API_URL + '/api/integrations/deliveries/' + $('Claim notification').first().json.delivery.id + '/result' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ 'n8n-'+$execution.id+'-mark-uncertain' }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 20000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {lease_token:$('Claim notification').first().json.delivery.lease_token,outcome:'uncertain',detail:'n8n provider step did not confirm delivery. Inspect execution '+$execution.id+' before retrying.'} }}"
+      },
+      "retryOnFail": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Bin Doul API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Poll outbox": {
+      "main": [
+        [
+          {
+            "node": "Claim notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claim notification": {
+      "main": [
+        [
+          {
+            "node": "Has a delivery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has a delivery": {
+      "main": [
+        [
+          {
+            "node": "Prepare message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare message": {
+      "main": [
+        [
+          {
+            "node": "Email channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email channel": {
+      "main": [
+        [
+          {
+            "node": "Email monthly report",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "WhatsApp monthly report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email monthly report": {
+      "main": [
+        [
+          {
+            "node": "Email report PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send alert email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email report PDF": {
+      "main": [
+        [
+          {
+            "node": "Send monthly email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark uncertain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp monthly report": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp report PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send WhatsApp alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp report PDF": {
+      "main": [
+        [
+          {
+            "node": "Upload WhatsApp PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark uncertain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload WhatsApp PDF": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp monthly",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark uncertain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send monthly email": {
+      "main": [
+        [
+          {
+            "node": "Confirm sent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark uncertain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send alert email": {
+      "main": [
+        [
+          {
+            "node": "Confirm sent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark uncertain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send WhatsApp monthly": {
+      "main": [
+        [
+          {
+            "node": "Confirm sent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark uncertain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send WhatsApp alert": {
+      "main": [
+        [
+          {
+            "node": "Confirm sent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark uncertain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Aden",
+    "executionTimeout": 540
+  },
+  "pinData": {},
+  "tags": []
+}

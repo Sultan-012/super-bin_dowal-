@@ -1,0 +1,29 @@
+# Runtime lock resolved and tested with Python 3.12; includes all runtime dependencies.
+alembic==1.17.0
+annotated-doc==0.0.5
+annotated-types==0.8.0
+anyio==4.15.1
+argon2-cffi==25.1.0
+argon2-cffi-bindings==26.1.0
+cffi==2.1.1
+click==8.5.0
+fastapi==0.156.8
+greenlet==3.5.6
+h11==0.16.0
+idna==3.20
+mako==1.4.3
+markupsafe==3.0.4
+opentelemetry-api==1.45.1
+pycparser==3.12
+pydantic==2.14.1
+pydantic-core==2.50.1
+pydantic-settings==2.11.0
+pyodbc==5.3.0
+python-dotenv==1.2.4
+sqlalchemy==2.0.44
+starlette==1.6.0
+typing-extensions==4.16.0
+typing-inspection==0.4.4
+tzdata==2025.2
+uvicorn==0.38.0
+colorama==0.4.6; sys_platform == "win32"

@@ -1,0 +1,80 @@
+{
+  "name": "Bin Doul | Monthly reports (inactive)",
+  "active": false,
+  "nodes": [
+    {
+      "id": "first-day-each-month",
+      "name": "First day each month",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 0 6 1 * *"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare-previous-month",
+      "name": "Prepare previous month",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.BIN_DOUL_API_URL + '/api/integrations/monthly-reports' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ 'n8n-'+$execution.id+'-prepare-previous-month' }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "retryOnFail": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Bin Doul API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "First day each month": {
+      "main": [
+        [
+          {
+            "node": "Prepare previous month",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Aden"
+  },
+  "pinData": {},
+  "tags": []
+}

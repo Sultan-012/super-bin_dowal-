@@ -1,0 +1,15 @@
+{
+  "description_ar": "بيانات مثال القبول فقط. لا تُحمّل تلقائيًا في قاعدة التشغيل.",
+  "business_date": "2026-10-01",
+  "opening_cash": "500.00",
+  "total_sales": "3000.00",
+  "pos_sales": "1200.00",
+  "credit_customer": "عميل المبيعات الآجلة — مثال",
+  "new_credit_sales": "300.00",
+  "opening_debt_customer": "عميل الرصيد السابق — مثال",
+  "opening_debt_amount": "500.00",
+  "cash_collection": "200.00",
+  "cash_purchase": "400.00",
+  "cash_expense": "100.00",
+  "expected_cash": "1700.00"
+}

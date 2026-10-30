@@ -1,0 +1,17 @@
+# Production v2.4. Legacy SQL Server v1 dependencies are in requirements-legacy.txt.
+-c requirements-shift-lock.txt
+fastapi==0.156.8
+starlette==1.6.0
+uvicorn==0.38.0
+SQLAlchemy==2.0.44
+alembic==1.17.0
+pydantic==2.14.1
+pydantic-settings==2.11.0
+argon2-cffi==25.1.0
+psycopg[binary]==3.2.12
+tzdata==2025.2
+reportlab==4.4.9
+Pillow==13.0.0
+pypdf==6.21.4
+arabic-reshaper==3.0.0
+python-bidi==0.6.7

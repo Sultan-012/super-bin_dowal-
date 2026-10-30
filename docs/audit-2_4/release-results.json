@@ -1,0 +1,87 @@
+{
+  "version": "2.4.0",
+  "release_status": "candidate_pending_cleanup_approval_and_device_provider_acceptance",
+  "tested_date": "2026-10-30",
+  "runtime": {
+    "python": "3.12.14",
+    "node": "24.22.1",
+    "postgresql": "17.11",
+    "n8n": "2.41.7"
+  },
+  "backend_postgres_run": {
+    "passed": 68,
+    "failed": 0,
+    "warnings": 3,
+    "note": "Main system fixtures use actual PostgreSQL. Two standalone sample/upgrade checks intentionally use file SQLite; calculation tests are database-independent."
+  },
+  "backend_sqlite_run": {
+    "passed": 67,
+    "skipped": 1,
+    "failed": 0,
+    "warnings": 3
+  },
+  "frontend": {
+    "dom_cases_passed": 14,
+    "format_checks_passed": 10,
+    "strict_types": "passed, source and tests",
+    "production_build": "passed",
+    "native_browser_visual_mobile": "not_run_infrastructure_restriction"
+  },
+  "n8n": {
+    "engine": "n8n 2.41.7",
+    "database": "PostgreSQL 17.11",
+    "monthly_workflow": true,
+    "deliveries_sent": 4,
+    "email_local_sink": 2,
+    "whatsapp_local_stub": 2,
+    "pdf_uploads_local_stub": 1,
+    "pdf_email_attachments": 1,
+    "empty_outbox_no_duplicate": true,
+    "provider_503_marked_uncertain_without_retry": true,
+    "duplicate_attempts": 0,
+    "external_messages_sent": 0,
+    "real_provider_credentials_tested": false,
+    "schedule_trigger": "manual clone; original workflows remain inactive"
+  },
+  "database_operations": {
+    "postgresql": "17.11",
+    "exported_schema_sql_executed_in_fresh_database": true,
+    "upgrade_existing_v2_to_24_preserved_records": true,
+    "runtime_non_owner_login_and_user_creation": true,
+    "runtime_denied_delete_truncate_alter_create": true,
+    "pg_dump_pg_restore_every_table_equal_before_hold": true,
+    "post_restore_auth_sessions_revoked": true,
+    "post_restore_audit_record": true,
+    "new_engine_persistence": true,
+    "powershell_wrapper_executed": false
+  },
+  "known_dependency_findings": {
+    "production_python": 0,
+    "frontend_including_dev": 0
+  },
+  "source_audit": {
+    "scanner": "Bandit 1.9.4",
+    "scope": "backend/shift_app",
+    "high": 0,
+    "medium": 0,
+    "low": 1,
+    "reviewed_low": {
+      "id": "B105",
+      "file": "backend/shift_app/main.py",
+      "line": 326,
+      "reason": "Public password_min_length=8 metadata; not a password or credential"
+    }
+  },
+  "manual_pdf_review": "one-page Arabic monthly PDF rendered with Poppler and visually inspected; not browser print QA",
+  "not_run": [
+    "Windows installation/PowerShell/CMD execution",
+    "real SMTP credentials and recipient delivery",
+    "real WhatsApp/Meta credentials, approved templates and delivery receipts",
+    "real-time cron waiting",
+    "Docker/HTTPS reverse proxy deployment",
+    "production user database upgrade (only isolated fixtures upgraded)"
+  ],
+  "deletions_authorized_or_performed": false,
+  "proposed_deletions": 74,
+  "packaged_smoke": "passed: migrations, first-admin CLI, static assets, login, saved shift, Arabic PDF, restart; isolated file SQLite"
+}

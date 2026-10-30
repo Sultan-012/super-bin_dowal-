@@ -1,0 +1,11 @@
+-c requirements-lock.txt
+fastapi==0.156.8
+starlette==1.6.0
+uvicorn==0.38.0
+SQLAlchemy==2.0.44
+alembic==1.17.0
+pydantic==2.14.1
+pydantic-settings==2.11.0
+argon2-cffi==25.1.0
+pyodbc==5.3.0
+tzdata==2025.2

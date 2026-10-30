@@ -1,0 +1,40 @@
+تحديث واجهة نظام بن دول v2.3
+
+محتوى الحزمة:
+- frontend/src/shift/App.tsx
+- frontend/src/shift/Dashboard.tsx
+- frontend/src/shift/Employee.tsx
+- frontend/src/shift/Manage.tsx
+- frontend/src/shift/context.ts
+- frontend/src/shift/styles.css
+
+قبل التركيب:
+1) أوقف خادم Uvicorn بالضغط Ctrl+C.
+2) احتفظ بنسخة احتياطية من مجلد المشروع.
+3) لا تستبدل ملف .env ولا قاعدة البيانات. هذا تحديث للواجهة فقط.
+
+طريقة التثبيت على Windows:
+1) ضع BinDoul_UI_v2_3_Patch.zip في Downloads.
+2) افتح PowerShell في مجلد Bin_Doul_Financial_System (المجلد الذي يحتوي frontend و backend).
+3) نفّذ:
+   $zip = Join-Path $env:USERPROFILE 'Downloads\BinDoul_UI_v2_3_Patch.zip'
+   Test-Path -LiteralPath $zip
+   Expand-Archive -LiteralPath $zip -DestinationPath (Get-Location).Path -Force
+   npm --prefix frontend ci
+   npm --prefix frontend run build
+4) شغّل Backend من مجلد backend:
+   .\.venv\Scripts\python.exe -m uvicorn shift_app.main:create_app --factory --host 127.0.0.1 --port 8000
+5) افتح http://127.0.0.1:8000 ثم Ctrl+F5.
+
+الإضافات:
+- 3 رسوم تحليلية في «نظرة عامة» مع اختيار الموظف والشهر.
+- الأحمر للعجز والأخضر للفائض.
+- إظهار وإخفاء كلمة المرور في تسجيل الدخول وإضافة/تعديل المستخدم.
+- وضع ليلي يعمل في واجهتي المدير والموظف وصفحة تسجيل الدخول.
+
+تنبيه محاسبي مهم:
+نظام v2.2 لم يعد يحتسب عجز/فائض جديدًا بعد إلغاء حقول الشبكة والجرد.
+الرسوم تعرض قيم العجز والفائض القديمة المحفوظة فقط، ولا تُعد حسابًا جديدًا.
+
+التحقق:
+تم فحص صياغة ملفات TypeScript بنجاح، لكن فحص npm run build الكامل يتطلب الحزم الموجودة على جهازك.

@@ -1,0 +1,15 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> bin-doul-shifts-arabic@2.4.0 test
+> node tests/formatting.test.cjs && vitest run
+
+PASS: 10 checks for Arabic input, separators, exact formatting, null counts and invalid dates.
+
+ RUN  v4.1.12 <QA_WORKSPACE>/working/Bin_Doul_Financial_System/frontend
+
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  03:51:44
+   Duration  3.36s (transform 201ms, setup 92ms, import 325ms, tests 2.47s, environment 343ms)
+

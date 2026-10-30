@@ -1,0 +1,452 @@
+{
+  "status": "awaiting_user_approval",
+  "scope": "Only the exact listed files in the new release working copy; no database rows/tables, no .env, no original archive",
+  "count": 74,
+  "bytes": 1004086,
+  "files": [
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/alembic.ini",
+      "size": 547,
+      "sha256": "07c670eab3f26eb75f8269aba94fb3b10932a6f9adc4a2b7f753fb2527add326"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/cli.py",
+      "size": 1820,
+      "sha256": "33e512d5fda82eb354ab3eb340900a8f70e793785f90845e1eda0064c3b80ae2"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/common.py",
+      "size": 3241,
+      "sha256": "b1840feb2d0035c229d592546e11e782455e281301c52a96d4eb2c91804089d4"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/config.py",
+      "size": 1667,
+      "sha256": "c6362ee57b96e0ab1f2a1ba56019437c30d8dcea3e6120d99f0cb761f075c2be"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/db.py",
+      "size": 656,
+      "sha256": "89311b27bd7e9e224cc4ada5c374fdcec6232d46ef162430cb67e05b1dc699c6"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/finance.py",
+      "size": 2109,
+      "sha256": "fadfcfd779b1623011676640f4419a78646f07af6b4f0ed859d290522b61db7f"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/main.py",
+      "size": 22512,
+      "sha256": "e32fd7763d7545ce7b896691d06d8740e8f90950058d1a36efb4c31b73bbeee3"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/models.py",
+      "size": 11022,
+      "sha256": "53b24a7915c044ad7a49e979d51f6b2894ea618dbbd72f5236772aa707b943c8"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/sample_data.py",
+      "size": 2883,
+      "sha256": "7bf630f4abe7470a675c6f9fe47ecd4069f02dbb5a7ce9c697b5186e101a7afc"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/schemas.py",
+      "size": 4927,
+      "sha256": "16e3197052c984c80a3f8b171e3e1f1d4970383e6b2252d8d3c679b186c8452d"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/security.py",
+      "size": 4154,
+      "sha256": "0c69e522cf0c87c7f2614fc0c59ca125a2f00d66fe617e2237b0548bb4462d16"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/app/services.py",
+      "size": 21512,
+      "sha256": "cf6d6b23ffffe6fcefa8ddbbd6932b72e2d5f033dca82052b0989fc14d4e4045"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/migrations/env.py",
+      "size": 780,
+      "sha256": "ec6397614f0237235096176f0ab5c9f48deee7a667aa4d6426a8fbc6d62bdec9"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/migrations/script.py.mako",
+      "size": 424,
+      "sha256": "7420fcf8f971684db86b4a2f1613bca9897b75edec9c79979d33b3ba7ed277b0"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/migrations/versions/0001_initial_schema.py",
+      "size": 18463,
+      "sha256": "7ac8a6b60a050201b11e7232c963f1e30f131ed0b36c95f60059ebeb1981e90d"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/migrations/versions/0002_append_only.py",
+      "size": 1111,
+      "sha256": "1cb6067f493567706683a26ab03f62caba8550abd6ed1e0fd58a9b39979bd5a7"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/requirements-legacy.txt",
+      "size": 202,
+      "sha256": "f9d3b7e828add0ec5bbcc3eb5b8bece790bfa013f472a73cab3d3f2f9cee7b6b"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/requirements-lock.txt",
+      "size": 623,
+      "sha256": "6d1582e919a9cb8ba967c624a52a866cc483be4f83e5254f0914a39392d274bd"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/tests/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/tests/conftest.py",
+      "size": 3857,
+      "sha256": "72be9e8b50d09dc209b1ce5e71c15f597f1dcd7e460ab74c16aab493872b2e0a"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/tests/test_additional_integrity.py",
+      "size": 4397,
+      "sha256": "6f325898c4a00c7105916788bf7b6c635ae3e3ad41c5e733422f04191cd9a35d"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/tests/test_endpoints.py",
+      "size": 13279,
+      "sha256": "03028ff86c520ece74fe261eaedcf1ccbb92be71908bc4c967d39dc410a4594f"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/tests/test_finance.py",
+      "size": 1454,
+      "sha256": "45a1dec9c0cecdbc13c579090275468b1fb13a3c76dea5d3ca42b90e9ed13e18"
+    },
+    {
+      "category": "ملفات خادم SQL Server الأول غير المستخدم",
+      "path": "backend/tests/test_sqlserver.py",
+      "size": 3121,
+      "sha256": "289f3f4778bd65b72a04db2a5877a5d0481233284cf2a362236426c568eced9f"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/Customers.tsx",
+      "size": 16836,
+      "sha256": "24e7da7785b9842774dd89fd801a483aeb330511d1c2113fc942e29e5a639b83"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/Daily.tsx",
+      "size": 23195,
+      "sha256": "adbf976cc3332562d0f2a51f5375b78b8220197597bad9693ff207dd641bb01b"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/Dashboard.tsx",
+      "size": 10058,
+      "sha256": "68d80532b5d10956bcb1bc955596a4ace77d0582cacf1e50074cd68150196913"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/History.tsx",
+      "size": 4519,
+      "sha256": "1e552e69eb735c9187a0197b2edb1676db67a0d07c32f1cc736768fb8bbb2a6b"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/Movements.tsx",
+      "size": 4298,
+      "sha256": "6ac802fa1fa7b37d41e5fe07a9fb8683de6e96fbab7c04cfc155a0ac2467f5ac"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/Reports.tsx",
+      "size": 9247,
+      "sha256": "c258a12aaf56f11ea3052f01f53fb039caee27b711c0d5426d1199895488c56a"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/Settings.tsx",
+      "size": 19135,
+      "sha256": "385acd35b54bf2d7a5313168a97fa96bed1c038e7f0bad26dcb723de66177ed5"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/api.ts",
+      "size": 4662,
+      "sha256": "7b3babf44430658354ac2cd03e84d27b03c464eaeb4319280a7dde6afa5afb25"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/components.tsx",
+      "size": 16536,
+      "sha256": "e7f5f3cf22b65c82d702d9e8908e006c11f385ca07a816d87913e0bf5cad0b2e"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/context.ts",
+      "size": 326,
+      "sha256": "7468ee29511df9e1910129716ae66d71854319ac7cb8ebb7894e6fb741e2f10f"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/dialogs.tsx",
+      "size": 18689,
+      "sha256": "4f6f131322cd907d174d47a96cbc9a1c738be84977eec41c0150edc790aad17f"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/legacy-main.tsx",
+      "size": 13138,
+      "sha256": "038cfd07403122146fe13b3f791e2114772ec2b44ea0c052fc666f30104318a6"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/styles.css",
+      "size": 40753,
+      "sha256": "b0620836d9bc7a6b0340b5d6a8df08ddfc1329c686ff8f5a75f2b1331b582979"
+    },
+    {
+      "category": "واجهة الإصدار الأول غير المستوردة في المدخل الحالي",
+      "path": "frontend/src/types.ts",
+      "size": 4784,
+      "sha256": "93608a3bcc6efee0e609eccc9c399f258ddf06a06a2d1f3a7387e16ed7db4f17"
+    },
+    {
+      "category": "اختبارات ومسارات تشغيل قديمة متوقفة",
+      "path": "backend/shift_tests/test_active_chain.py",
+      "size": 2394,
+      "sha256": "8b99bb7bef60e01b86f10e169f7b5c8f898cebe90782c3ea38a5e3b62131d722"
+    },
+    {
+      "category": "اختبارات ومسارات تشغيل قديمة متوقفة",
+      "path": "backend/shift_tests/test_opening_reversal.py",
+      "size": 951,
+      "sha256": "ee8cd502807264da793f20d91db93920936d635dcb773688eea4a879395a176d"
+    },
+    {
+      "category": "اختبارات ومسارات تشغيل قديمة متوقفة",
+      "path": "backend/shift_tests/test_snapshot.py",
+      "size": 628,
+      "sha256": "172a998c89776bf4e5ffb301bb67c938595c0bd01179b3f172b04b51ec4771c8"
+    },
+    {
+      "category": "اختبارات ومسارات تشغيل قديمة متوقفة",
+      "path": "scripts/prepare-v2_2-tests.py",
+      "size": 1010,
+      "sha256": "31be647a1c04049d1157e5e7bae1eb7c01c8165031687299b39584239719bb91"
+    },
+    {
+      "category": "اختبارات ومسارات تشغيل قديمة متوقفة",
+      "path": "scripts/serve.mjs",
+      "size": 1113,
+      "sha256": "cfb5215a34ae2669d75df3e93a96976702c4550144459d1e21cd0dd5d63fb393"
+    },
+    {
+      "category": "اختبارات ومسارات تشغيل قديمة متوقفة",
+      "path": "scripts/serve.py",
+      "size": 899,
+      "sha256": "2731517fe5eafb6acdfbfc43b8d20521671e2f3e763a3bfe7678fabd8a1cf482"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "INSTALL_UI_v2_3_AR.txt",
+      "size": 2061,
+      "sha256": "6f96590d2b47036fdd5c7c3547e7568dd32ff00eb3d2c9490f678d7f513b338a"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "MANIFEST_SHA256.txt",
+      "size": 13514,
+      "sha256": "54e2b6fe869973036c81c510c51d92859f2f041d6027b3cc021dea5c9ce31759"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/API_V2_AR.md",
+      "size": 5133,
+      "sha256": "1f51c641b3de89fedd8dfc972dd8d448176de49359cb7183b51e045430ff6ef2"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/DATABASE_V2_AR.md",
+      "size": 10743,
+      "sha256": "635795030393c79bcafe5b1ed5e2ba3a42a0c0cd69da9c187d52c32c11593527"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/FINANCIAL_RULES_V2_AR.md",
+      "size": 8794,
+      "sha256": "b9cf26223887ec26353f5c5dfa5f1de25f7f75d4831c4b2d5be8e288f16ce72e"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/LEGACY_V1_DATABASE_AR.md",
+      "size": 10768,
+      "sha256": "6e5d269cc874b33c51c0247683b7d7536cbac5a9278e56cda5dbd5e8f72584ee"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/LEGACY_V1_FINANCIAL_RULES_AR.md",
+      "size": 13560,
+      "sha256": "c17956441003d77f0d22022622fae324eb11c37ff99216ae3ceaaccc842b9736"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/LEGACY_V1_MANIFEST_SHA256.txt",
+      "size": 6204,
+      "sha256": "7b850823bff7e2df0797be253904e7e118c834d2751a8f4d8cb164b6c9ac7576"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/LEGACY_V1_README_AR.md",
+      "size": 18639,
+      "sha256": "4012a45da4858548b633dfd42dadefd0cd3e3cb7181c68c7f84c239a3c4884ed"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/LEGACY_V1_TEST_RESULTS_AR.md",
+      "size": 11126,
+      "sha256": "7a55b8db00c771df1b5fdad0ebf622fe9dcbba1adfbf0f9d1b2f39805f15feaf"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/TEST_RESULTS_AR.md",
+      "size": 382,
+      "sha256": "b5d628ca909e0fbd06a2915388fdc262126d11f01ac44502479d05d065557d46"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/TEST_RESULTS_V2_2_AR.md",
+      "size": 2146,
+      "sha256": "594516a22dde0462f3db0f9462232830022164b3bdc7c760d53d08dd0b24b61f"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/TEST_RESULTS_V2_AR.md",
+      "size": 9832,
+      "sha256": "f2e2adb83966863dbbf4b8a222a52c34ffa3822edb507113882832363f9fa735"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/UPDATE_V2_1_EMPLOYEE_AR.md",
+      "size": 6845,
+      "sha256": "7dd575e8ec7940ddbb438a91837c9ab6014513c42d020050627c89dd58bf19b2"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/UPDATE_V2_2_AR.md",
+      "size": 7409,
+      "sha256": "74d94ef8d7c5d854072ba453e0b40d0ccaf20724586431f8c5c92e7cd3bce716"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/frontend-dependency-audit.json",
+      "size": 363,
+      "sha256": "446ceafd075c57fa24612e2992ce0137de137fdb1dcc81fe89d63f38e1d2d2aa"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/legacy-sqlserver.env.example",
+      "size": 971,
+      "sha256": "13843134d900b1d2836ee8e0d2812f652e0b56e5b74dbafefaf8dc13341ecd20"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/openapi-v2.json",
+      "size": 53075,
+      "sha256": "eb798b044492ac0025b20fdb1271ca9a89d8c676489691f5d8551651def4fb0b"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/openapi-v2_2.json",
+      "size": 42350,
+      "sha256": "a46fcf71d3912f2d31f09ac4700d2035f2f6f3eff1625b8399703bdb22e56ffb"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/postgresql-v2-schema.sql",
+      "size": 13564,
+      "sha256": "d2312e790d002ea2086a4cf55fad337a4792cf6d0c1ab18caf80e5a98a92f7eb"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/python-dependency-audit.json",
+      "size": 1579,
+      "sha256": "6595e2006d4214beebeeaa2f6555b37d8e8662830ef937074df360d1d2496d5b"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/runtime-permissions.sql",
+      "size": 1751,
+      "sha256": "f5e47c868a79bf0572567e45953ec4b13acf281b5ad5810728524d75fd663017"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/sqlserver-schema.sql",
+      "size": 11266,
+      "sha256": "94c4acc79f71540c66f4092e1528574de5f3c8d3cc9414c69e10dfb2f2f78e2d"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "docs/test-results-v2.txt",
+      "size": 1000,
+      "sha256": "3e058ae743ba7afad1dbdc3e88d7fac8170db485a4eb00eb78b7be45b79dd08a"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "sample-data/acceptance-example.json",
+      "size": 590,
+      "sha256": "7370075b769719a9b89336d53da121bf76a422dde17deb46b5527bda10c81fa5"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "sample-data/v2-report-sample.pdf",
+      "size": 56674,
+      "sha256": "d2cc74660d71663b8141bae270a8f734f9261eb16e296c41c3ef124f445dc2c5"
+    },
+    {
+      "category": "توثيق ومخططات ونتائج وأمثلة تاريخية استبدلتها وثائق 2.4",
+      "path": "sample-data/v2-shift-sample.pdf",
+      "size": 56982,
+      "sha256": "4f983109e2f268016d65ffa18a64ec17ce69a322242da30235e2c333dd799146"
+    },
+    {
+      "category": "أصول بناء قديمة لا يستوردها index.html الحالي",
+      "path": "frontend/dist/assets/index-3svv44vR.js",
+      "size": 291950,
+      "sha256": "9c9cc2fa2333d99b4a17100cbe4e886954e33c8f5a0d77e881f6bea79a680ec0"
+    },
+    {
+      "category": "أصول بناء قديمة لا يستوردها index.html الحالي",
+      "path": "frontend/dist/assets/index-BwTQlXo5.css",
+      "size": 26883,
+      "sha256": "a7e78489cd70649c0578347ddb141dea08f8b33e27d990bab60c608da5e8e3a1"
+    }
+  ]
+}

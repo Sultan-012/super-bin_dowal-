@@ -1,0 +1,16 @@
+{
+  "engine": "n8n 2.41.7",
+  "database": "PostgreSQL 17.11",
+  "monthly_workflow": true,
+  "deliveries_sent": 4,
+  "email_local_sink": 2,
+  "whatsapp_local_stub": 2,
+  "pdf_uploads_local_stub": 1,
+  "pdf_email_attachments": 1,
+  "empty_outbox_no_duplicate": true,
+  "provider_503_marked_uncertain_without_retry": true,
+  "duplicate_attempts": 0,
+  "external_messages_sent": 0,
+  "real_provider_credentials_tested": false,
+  "schedule_trigger": "manual clone; original workflows remain inactive"
+}

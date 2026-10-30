@@ -1,0 +1,2 @@
+# Default v2 application. Legacy SQL Server dependencies are in requirements-legacy.txt.
+-r requirements-shift.txt
